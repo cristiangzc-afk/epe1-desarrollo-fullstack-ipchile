@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prototipo interactivo de operaciones para logística de última milla.">
+  <title>RutaControl | Operaciones de última milla</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <!-- Encabezado y resumen del caso logístico -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="RutaControl, volver al inicio">
+        <span class="brand-mark">RC</span>
+        <span><strong>RutaControl</strong><small>Centro de operaciones</small></span>
+      </a>
+      <div class="header-status"><span class="pulse-dot" aria-hidden="true"></span> Jornada operativa activa</div>
+    </div>
+  </header>
+
+  <main id="inicio" class="container">
+    <!-- Presentación del prototipo -->
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">EPE1 · Desarrollo Full Stack</p>
+        <h1>Decisiones rápidas para una última milla <em>sin fricción.</em></h1>
+        <p class="hero-text">Panel de entrenamiento para operaciones urbanas. Cada tarjeta demuestra una interacción de JavaScript aplicada al seguimiento diario de despachos.</p>
+        <div class="hero-tags"><span>10 interacciones</span><span>Datos temporales</span><span>DOM + JavaScript</span></div>
+      </div>
+      <div class="hero-metric" aria-label="Resumen de operación">
+        <span class="metric-label">Despachos en ruta</span><strong>128</strong><span class="metric-note">+12% vs. ayer</span>
+        <div class="mini-chart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </section>
+
+    <!-- Indicadores operativos -->
+    <section class="stats-grid" aria-label="Indicadores operativos">
+      <article class="stat-card"><span class="stat-icon blue">↗</span><div><span>Entregas hoy</span><strong>1.284</strong><small>94,2% completadas</small></div></article>
+      <article class="stat-card"><span class="stat-icon orange">◷</span><div><span>En preparación</span><strong>236</strong><small>18 rutas activas</small></div></article>
+      <article class="stat-card"><span class="stat-icon green">✓</span><div><span>Incidencias abiertas</span><strong>07</strong><small>−3 desde las 08:00</small></div></article>
+    </section>
+
+    <!-- Título de la sección de interacciones -->
+    <section class="section-heading"><div><p class="eyebrow">Laboratorio de interacción</p><h2>Control operativo en tiempo real</h2></div><span class="section-count">01 — 10</span></section>
+
+    <!-- Interacción 01: actualización de estado -->
+    <article class="interaction-card card-blue" id="interaccion-01">
+      <div class="card-number">01</div><div class="card-content"><div class="card-title-row"><div><p class="card-kicker">Actualización de estado</p><h3>Confirmar salida de ruta</h3></div><span class="badge badge-waiting" id="dispatchStatus">Pendiente</span></div>
+      <p class="card-description">Actualiza el mensaje operativo y registra la hora de confirmación sin recargar la página.</p><div class="control-row"><button class="btn btn-primary" id="confirmDispatchBtn" type="button">Confirmar salida <span>→</span></button><output class="live-note" id="dispatchMessage" aria-live="polite">La ruta R-042 espera confirmación.</output></div></div>
+    </article>
+
+    <!-- Interacción 02: cambio de estado visual -->
+    <article class="interaction-card card-green" id="interaccion-02">
+      <div class="card-number">02</div><div class="card-content"><div class="card-title-row"><div><p class="card-kicker">Cambio de estado visual</p><h3>Modo de operación</h3></div><span class="mode-pill" id="modePill">Modo normal</span></div>
+      <p class="card-description">Alterna entre operación normal y contingencia para representar visualmente una alerta.</p><div class="toggle-row"><button class="toggle" id="modeToggle" type="button" role="switch" aria-checked="false" aria-label="Alternar modo de operación"><span></span></button><span id="modeLabel">Operación estable</span></div></div>
+    </article>
+
+    <!-- Interacción 03: contador operativo -->
+    <article class="interaction-card card-orange" id="interaccion-03">
+      <div class="card-number">03</div><div class="card-content"><div class="card-title-row"><div><p class="card-kicker">Contador operativo</p><h3>Paquetes procesados</h3></div><span class="counter-value" id="packageCount">24</span></div>
+      <p class="card-description">Suma o resta paquetes procesados y actualiza el indicador mediante una variable.</p><div class="control-row"><button class="btn btn-ghost" id="decreasePackageBtn" type="button" aria-label="Restar un paquete">−</button><button class="btn btn-orange" id="increasePackageBtn" type="button">+ Registrar paquete</button><span class="unit-label">unidades en el turno</span></div></div>
+    </article>
+
+    <!-- Interacción 04: mostrar y ocultar detalle -->
+    <article class="interaction-card card-purple" id="interaccion-04">
+      <div class="card-number">04</div><div class="card-content"><div class="card-title-row"><div><p class="card-kicker">Detalle bajo demanda</p><h3>Incidencia de entrega #INC-207</h3></div><button class="link-button" id="detailToggle" type="button" aria-expanded="false" aria-controls="incidentDetail">Ver detalle <span>↓</span></button></div>
+      <p class="card-description">Muestra u oculta información adicional de una incidencia y cambia el texto de la acción.</p><div class="detail-panel" id="incidentDetail" hidden><strong>Dirección incompleta</strong><span>Ruta R-042 · Última actualización hace 8 min</span><span class="detail-alert">Acción sugerida: contactar al destinatario.</span></div></div>
+    </article>
+
+    <!-- Interacción 05: vista previa en tiempo real -->
+    <article class="interaction-card card-teal" id="interaccion-05">
+      <div class="card-number">05</div><div class="card-content"><div class="card-title-row"><div><p class="card-kicker">Vista previa en tiempo real</p><h3>Nota para el repartidor</h3></div><span class="char-count" id="noteCount">0 / 120</span></div>
+      <p class="card-description">Escribe una instrucción operativa: el contenido se refleja de inmediato y puede limpiarse.</p><div class="input-with-action"><input id="driverNote" type="text" maxlength="120" placeholder="Ej.: Dejar en conserjería si no responden..." aria-label="Nota para el repartidor"><button class="btn btn-ghost" id="clearNoteBtn" type="button">Limpiar</button></div><div class="preview-box"><span>Vista previa</span><p id="notePreview">Tu instrucción aparecerá aquí.</p></div></div>
+    </article>
+
+    <!-- Interacción 06: selección y cálculo -->
+    <article class="interaction-card card-indigo" id="interaccion-06">
+      <div class="card-number">06</div><div class="card-content"><div class="card-title-row"><div><p class="card-kicker">Selección y cálculo</p><h3>Estimador de carga</h3></div><output class="calculation-result" id="loadResult" aria-live="polite">0 kg</output></div>
+      <p class="card-description">Selecciona el tipo de vehículo e ingresa paquetes para calcular la carga estimada.</p><div class="form-grid"><label>Vehículo<select id="vehicleSelect"><option value="0">Seleccionar...</option><option value="1.8">Furgón urbano · 1,8 kg/paquete</option><option value="3.2">Camión liviano · 3,2 kg/paquete</option><option value="0.9">Moto · 0,9 kg/paquete</option></select></label><label>Paquetes<input id="packageInput" type="number" min="0" value="0" inputmode="numeric"></label></div><p class="formula" id="loadFormula">Completa los datos para ver el cálculo.</p></div>
+    </article>
+
+    <!-- Interacción 07: rango y progreso -->
+    <article class="interaction-card card-yellow" id="interaccion-07">
+      <div class="card-number">07</div><div class="card-content"><div class="card-title-row"><div><p class="card-kicker">Rango y progreso</p><h3>Capacidad de la ruta</h3></div><strong class="progress-percent" id="progressValue">68%</strong></div>
+      <p class="card-description">Ajusta el nivel de carga de la ruta y observa cómo cambia el porcentaje y la barra.</p><input class="range-input" id="routeProgress" type="range" min="0" max="100" value="68" aria-label="Porcentaje de carga de la ruta"><div class="progress-track"><span id="progressBar" style="width: 68%"></span></div><div class="progress-meta"><span>0% · Libre</span><span id="progressStatus">Operación óptima</span><span>100% · Completa</span></div></div>
+    </article>
+
+    <!-- Interacción 08: creación y eliminación dinámica -->
+    <article class="interaction-card card-pink" id="interaccion-08">
+      <div class="card-number">08</div><div class="card-content"><div class="card-title-row"><div><p class="card-kicker">Creación y eliminación dinámica</p><h3>Lista de tareas del turno</h3></div><span class="task-total" id="taskTotal">2 pendientes</span></div>
+      <p class="card-description">Agrega tareas nuevas a la lista y elimínalas usando nodos creados con JavaScript.</p><div class="input-with-action"><input id="taskInput" type="text" maxlength="60" placeholder="Ej.: Revisar sellos de seguridad" aria-label="Nueva tarea"><button class="btn btn-pink" id="addTaskBtn" type="button">Agregar tarea</button></div><ul class="task-list" id="taskList"><li><span>Verificar escáneres de ruta</span><button type="button" class="remove-task" aria-label="Eliminar tarea">×</button></li><li><span>Revisar combustible de unidades</span><button type="button" class="remove-task" aria-label="Eliminar tarea">×</button></li></ul></div>
+    </article>
+
+    <!-- Interacción 09: filtrado de colección -->
+    <article class="interaction-card card-cyan" id="interaccion-09">
+      <div class="card-number">09</div><div class="card-content"><div class="card-title-row"><div><p class="card-kicker">Filtrado de colección</p><h3>Servicios de hoy</h3></div><span class="filter-count" id="filterCount">4 servicios</span></div>
+      <p class="card-description">Filtra la colección visible por estado sin recargar la página.</p><div class="filter-buttons" role="group" aria-label="Filtrar servicios"><button class="filter-btn active" type="button" data-filter="todos">Todos</button><button class="filter-btn" type="button" data-filter="en-ruta">En ruta</button><button class="filter-btn" type="button" data-filter="pendiente">Pendientes</button><button class="filter-btn" type="button" data-filter="incidencia">Incidencias</button></div><div class="service-list" id="serviceList"><div class="service-item" data-status="en-ruta"><span class="service-code">R-042</span><span>Centro → Ñuñoa</span><b class="status-dot status-route">En ruta</b></div><div class="service-item" data-status="pendiente"><span class="service-code">R-051</span><span>Maipú → Pudahuel</span><b class="status-dot status-pending">Pendiente</b></div><div class="service-item" data-status="incidencia"><span class="service-code">R-018</span><span>La Florida → Macul</span><b class="status-dot status-issue">Incidencia</b></div><div class="service-item" data-status="en-ruta"><span class="service-code">R-063</span><span>Providencia → Las Condes</span><b class="status-dot status-route">En ruta</b></div></div></div>
+    </article>
+
+    <!-- Interacción 10: formulario y validación -->
+    <article class="interaction-card card-red" id="interaccion-10">
+      <div class="card-number">10</div><div class="card-content"><div class="card-title-row"><div><p class="card-kicker">Formulario y validación</p><h3>Registrar una incidencia</h3></div><span class="required-label">Campos requeridos *</span></div>
+      <p class="card-description">Completa el formulario: se valida antes de procesarlo y muestra mensajes dentro de la página.</p><form id="incidentForm" novalidate><div class="form-grid form-grid-three"><label>Código de ruta *<input id="routeCode" type="text" placeholder="Ej.: R-042"><span class="field-error" id="routeCodeError"></span></label><label>Tipo de incidencia *<select id="incidentType"><option value="">Seleccionar...</option><option>Dirección incompleta</option><option>Destinatario ausente</option><option>Daño de paquete</option></select><span class="field-error" id="incidentTypeError"></span></label><label>Descripción *<input id="incidentDescription" type="text" placeholder="Describe brevemente"><span class="field-error" id="incidentDescriptionError"></span></label></div><div class="form-submit-row"><button class="btn btn-danger" type="submit">Guardar incidencia <span>→</span></button><output id="formFeedback" class="form-feedback" aria-live="polite"></output></div></form></div>
+    </article>
+  </main>
+
+  <!-- Pie con información de alcance -->
+  <footer class="site-footer"><div class="container footer-inner"><span>RutaControl · Prototipo académico</span><span>HTML5 · CSS3 · JavaScript · Sin persistencia de datos</span></div></footer>
+</body>
+</html>
